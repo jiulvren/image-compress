@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片压缩</title>
+</head>
+
+<body>
+    <input id="getImg" type="file" name="file" ref=imgFlie multiple="multiple" accept="image/*">
+    <img id="img" alt="">
+    <img id="compressimg" alt="">
+    <script src="./index.js"></script>
+    <script>
+        document.getElementById("getImg").onchange = function (e) {
+            var it = this;
+            var imgFile = e.target.files;
+            if (imgFile.length <= 0) {
+                return
+            };
+            for (var i = 0; i < imgFile.length; i++) {
+                document.getElementById("img").src = URL.createObjectURL(imgFile[i]);
+                var name = imgFile[i].name;
+                var quality = 0.1;
+                if (imgFile[i].type.indexOf('image') == -1) {
+                    return;
+                }
+                if ((Math.floor((imgFile[i].size) / 1024) <= 1024)) {
+                    quality = 0.2;
+                }
+                photoCompress(imgFile[i], {
+                    quality: 0.5,
+                }, function (base64Codes) {
+
+                    
+                });
+            }
+        }
+    </script>
+</body>
+
+</html>
